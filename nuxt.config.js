@@ -5,14 +5,14 @@ export default {
     base: '/pethut/'
   },
   head: {
-    title: 'pet-hut',
+    title: 'Pet Hut',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Pet Hut is a project for study purposes only, created just for fun. ' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
