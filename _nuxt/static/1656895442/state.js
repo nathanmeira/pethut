@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Fpethut\u002F_nuxt\u002Fstatic\u002F1656895442",layout:"default",error:a,serverRendered:true,routePath:"\u002F",config:{_app:{basePath:"\u002Fpethut\u002F",assetsPath:"\u002Fpethut\u002F_nuxt\u002F",cdnURL:a}}}}(null));
