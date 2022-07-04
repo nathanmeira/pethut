@@ -1,9 +1,12 @@
 # Pet Hut
 
-### Check the project [live](https://nathanmeira.github.io/pethut/) hosted on GitHub Pages!
+### [Check the project live](https://nathanmeira.github.io/pethut/) hosted on GitHub Pages!
 
 This is a study purposes project, created just for fun.
-You can find the original Figma Layout, built by [Bruno Totoro](https://dribbble.com/br00nu) by clicking [here](https://i.imgur.com/eRtx9hn.png).
+
+The original layout was created by [Bruno Totoro](https://dribbble.com/br00nu) from scratch.
+
+![Figma Layout](https://i.imgur.com/eRtx9hn.png)
 
 ---
 
