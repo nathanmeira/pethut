@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav :menu="menu" />
+    <Nav :pages="pages" />
     <div class="max-w-5xl mx-auto grid grid-cols-1 mt-10">
       <div class="grid overflow-hidden grid-cols-4 grid-rows-2 gap-5">
         <div class="box row-start-1 row-span-2 col-start-1 col-end-3">
@@ -49,12 +49,12 @@
       >
         <div class="box row-start-1 row-end-4 col-start-1 col-end-4">
           <div>
-            <span class="text-xl font-bold text-pet-primary">{{ dogProfile.name }}</span>
-            <div v-if="dogProfile" class="flex mt-4 text-gray-600">
+            <span class="text-xl font-bold text-pet-primary">{{ dogProfiles.name }}</span>
+            <div v-if="dogProfiles" class="flex mt-4 text-gray-600">
               <Icon name="location-icon" />
-              <span class="self-center ml-3">{{ dogProfile.location }}</span>
+              <span class="self-center ml-3">{{ dogProfiles.location }}</span>
               <span class="ml-3"> | </span>
-              <span class="self-center ml-3">Recolhido no dia {{ dogProfile.foundDate }}</span>
+              <span class="self-center ml-3">Rescued in {{ dateFormatter(dogProfiles.rescueDate) }}</span>
             </div>
             <div class="mt-4">
               <div
@@ -73,30 +73,17 @@
             </div>
             <div class="mt-6">
               <div id="description">
-                <p class="text-lg font-bold text-gray-600">História de {{ dogProfile.name }}:</p>
+                <p class="text-lg font-bold text-gray-600">{{ dogProfiles.name }}'s history:</p>
                 <div class="mb-3 mt-3 text-gray-500">
                   <p>
-                    Por trás do porte atlético e beleza natural, o Apollo é um cão doce e um pouco tímido.
-                    Ele procura por uma família com experiência em mostrar um mundo cheio de aventuras
-                    para um cão que ainda está se descobrindo.
-                  </p>
-                  <p>
-                    Se a família vier com irmãos mais velhos, é importante que sejam confiantes,
-                    porém compreensivos e dispostos a pegar leve com um recém chegado.
-                  </p>
-                  <p>
-                    Essa descrição soa muito com a sua família? Entre em contato, o Apollo vai adorar
-                    te conhecer.
-                  </p>
-                  <p>
-                    Apollo é adulto e é sociável com outros cães, e convive muito bem com gatos e crianças.
+                    {{ dogProfiles.description }}
                   </p>
                 </div>
               </div>
             </div>
             <hr>
             <div class="mt-6">
-              <p class="text-lg font-bold text-gray-600">Características de {{ dogProfile.name }}:</p>
+              <p class="text-lg font-bold text-gray-600">{{ dogProfiles.name }}'s characteristics:</p>
             </div>
             <div class="flex justify-between">
               <div
@@ -118,38 +105,41 @@
               class="inline-flex items-center gap-2 bg-[#fff8f7] text-pet-primary hover:bg-orange-100 px-6 py-2 mr-3 pointer rounded-full shadow-sm font-medium transition-all focus:outline-none"
             >
               <Icon name="share-icon" />
-              Compartilhar
+              Share
             </button>
             <button
               href="#"
               class="inline-flex items-center gap-2 bg-[#fff8f7] text-pet-primary hover:bg-orange-100 px-6 py-2 pointer rounded-full shadow-sm font-medium transition-all focus:outline-none"
             >
               <Icon name="save-icon" />
-              Salvar
+              Save
             </button>
           </div>
           <div class="flex mt-6 ml-4 p-4 border shadow-lg rounded-md">
             <div class="p-3">
-              <p class="text-lg font-bold text-gray-600">Quero adotar {{ dogProfile.gender === 'M' ? 'o' : 'a' }} {{ dogProfile.name }}</p>
+              <p class="text-lg font-bold text-gray-600">I want to adopt {{ dogProfile.name }}</p>
               <p class="mb-5 mt-3 text-gray-500">
-                Para adotar este cãozinho, precisamos te conhecer melhor. Clique
-                no botão abaixo para preencher o nosso formulário de adoção e,
-                caso seja selecionado, retornaremos em até 3 dias úteis após o
-                preenchimento deste formulário.
+                To adopt this puppy, we need to get to know you better.
+                Click the button below to complete our adoption form and,
+                if selected, we will get back to you within 3 business days
+                after completing this form.
               </p>
-              <Button size="F" text="Quero adotar" url="#" />
+              <Button
+                size="F"
+                text="I want to adopt"
+                url="#" />
             </div>
           </div>
           <div class="flex mt-4 ml-4 p-4 border rounded-md items-center">
             <Icon name="search-icon" class="self-center mr-2" />
             <p class="ml-4 mb-3 mt-3 text-gray-600">
-              <span class="text-pet-primary">{{ dogProfile.peopleInterested}} pessoas </span> já desmontraram interesse em adotar esse cãozinho
+              <span class="text-pet-primary">{{ dogProfile.peopleInterested}} people </span> have already shown interest to adopt this puppy
             </p>
           </div>
         </div>
       </div>
       <div class="mt-6">
-        <p class="text-lg font-bold text-gray-600">Outros cãezinhos esperando por um lar</p>
+        <p class="text-lg font-bold text-gray-600">Other puppies waiting for a home</p>
       </div>
       <div class="flex gap-2">
         <div v-for="dog in dogsList" :key="dog.index" class="mt-6 w-1/4 rounded-md overflow-hidden shadow-lg">
@@ -169,7 +159,7 @@
         <Button text="Veja todos" url="#" />
       </div>
     </div>
-    <Footer />
+    <Footer :footer="footer" />
   </div>
 </template>
 
@@ -177,25 +167,10 @@
 export default {
   data() {
     return {
-      menu: [
-        {
-          text: 'Home',
-          url: '#',
-        },
-        {
-          text: 'Sobre a ONG',
-          url: '#',
-        },
-        {
-          text: 'Saiba como apoiar',
-          url: '#',
-        },
-      ],
+      dog: [],
+      menu: [],
+      footerItems: [],
       dogProfile: {
-        name: "Apollo",
-        location: "São José dos Campos - SP",
-        foundDate: "20/10/2021",
-        gender: "M",
         peopleInterested: 8,
         info: [
           {
@@ -258,8 +233,52 @@ export default {
       ]
     }
   },
+  async fetch() {
+    this.dog = await fetch(
+      'http://localhost:1337/api/dogs/1?populate=*'
+    ).then(res => res.json())
 
+    this.menu = await fetch(
+      'http://localhost:1337/api/menu?populate=*'
+    ).then(res => res.json())
+
+    this.footerItems = await fetch(
+      'http://localhost:1337/api/footer?populate[navigation][populate]=*'
+    ).then(res => res.json())
+  },
+  computed: {
+    dogProfiles() {
+      return this.dog.data.attributes || []
+    },
+    dogPictures() {
+      return this.dog.data.attributes.pictures || []
+    },
+    dogInfo() {
+      return this.dog.data.attributes.information || []
+    },
+    dogCharacteristics() {
+      return this.dog.data.attributes.characteristics || []
+    },
+    pages() {
+      return this.menu.data.attributes.menuPage || []
+    },
+    footer() {
+      return this.footerItems.data.attributes || []
+    }
+  },
+  methods: {
+    dateFormatter(date) {
+      const dateFormatted = new Date(date)
+      return dateFormatted.toLocaleDateString('en-CA', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    },
+  }
 }
+
+
 </script>
 
 <style scoped>

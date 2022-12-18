@@ -7,21 +7,21 @@
             <img src="../static/img/pet-hut-logo.png" />
           </a>
           <ul
-            v-for="item in menu"
-            :key="item.index"
+            v-for="page in pages"
+            :key="page.id"
             class="text-gray-400 sm:self-center text-md border-t sm:border-none"
           >
             <li class="sm:inline-block">
-              <a :href="item.url" class="p-3 font-light text-gray-500 hover:text-gray-400">{{ item.text }}</a>
+              <a :href="page.link" class="p-3 font-light text-gray-500 hover:text-gray-400">{{ page.title }}</a>
             </li>
           </ul>
         </div>
         <div class="flex justify-between gap-4 self-center">
           <a href="#" class="self-center text-gray-500 hover:text-gray-400 font-semibold">
-            Entrar
+            Login
           </a>
-          <Button text="Cadastre-se" url="#" />
-          <Button text="Quero adotar" url="#" secondary />
+          <Button text="Sign Up" url="#" />
+          <Button text="Adopt a pet" url="#" secondary />
         </div>
       </div>
     </div>
@@ -32,15 +32,9 @@
 export default {
   name: "Nav",
   props: {
-    menu: {
+    pages: {
       type: Array,
-      default: () => [
-        {
-          index: 0,
-          text: "Home",
-          url: "#",
-        },
-      ],
+      default: () => null
     },
   },
 }
