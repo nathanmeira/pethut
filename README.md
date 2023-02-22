@@ -6,7 +6,7 @@ This project is for study purposes, created just for fun.
 
 > The original layout was created by [Bruno Totoro](https://dribbble.com/br00nu) from scratch.
 
-### Roadmap
+### 🗺️ Roadmap
 
 - [x] Code initial project
 - [ ] Integrate with Strapi CMS - _In progress..._
@@ -14,19 +14,19 @@ This project is for study purposes, created just for fun.
 - [ ] Refactor code for mobile
 - [ ] Add more pages - _Home page & adoption form_
 
-### Stack
+### 🔧 Stack
 
 - Nuxt.JS
 - TailwindCSS
 - JavaScript
 
-### Screenshots
+### 📸 Screenshots
 
 ![Figma Layout](https://i.imgur.com/eRtx9hn.png)
 
 ---
 
-## Build Setup
+## 🧰 Build Setup
 
 ```bash
 # install dependencies
